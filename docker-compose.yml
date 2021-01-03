@@ -7,6 +7,7 @@ services:
       - /dev/ttyUSB0:/dev/ttyUSB0
     volumes:
       - marax-storage:/var/log/marax
+    restart: always
   telegraf:
     image: telegraf
     depends_on:
@@ -15,6 +16,7 @@ services:
     volumes:
       - ./config/telegraf.conf:/etc/telegraf/telegraf.conf
       - marax-storage:/var/log/marax
+    restart: always
   influxdb:
     image: influxdb
     ports:
@@ -22,6 +24,7 @@ services:
     volumes:
       - influxdb-storage:/var/lib/influxdb
       - ./config/influxdb:/docker-entrypoint-initdb.d
+    restart: always
   grafana:
     image: grafana/grafana
     ports:
@@ -35,6 +38,7 @@ services:
     environment:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=admin
+    restart: always
 
 volumes:
   grafana-storage:
