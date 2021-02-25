@@ -7,6 +7,8 @@ services:
       - /dev/ttyUSB0:/dev/ttyUSB0
     volumes:
       - marax-storage:/var/log/marax
+#     environment:
+#       - TZ=Australia/Sydney
     restart: always
   telegraf:
     image: telegraf
@@ -18,7 +20,7 @@ services:
       - marax-storage:/var/log/marax
     restart: always
   influxdb:
-    image: influxdb
+    image: influxdb:1.7
     ports:
       - 8086:8086
     volumes:
